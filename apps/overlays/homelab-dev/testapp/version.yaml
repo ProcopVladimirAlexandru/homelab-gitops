@@ -1,0 +1,17 @@
+# This file helps to dynamically override the image tag for the testapp deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testapp
+spec:
+  selector:
+    matchLabels:
+      app: testapp
+  template:
+    metadata:
+      labels:
+        app: testapp
+    spec:
+      containers:
+        - name: testapp
+          image: ghcr.io/ProcopVladimirAlexandru/testapp-dev:latest
