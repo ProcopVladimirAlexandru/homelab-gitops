@@ -1,0 +1,40 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+nameSuffix: -dev
+resources:
+- ../../../bases/testapp
+replicas:
+- count: 1
+  name: testapp-dev
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/template/metadata/labels/app.kubernetes.io~1name
+      value: testapp-dev
+    - op: replace
+      path: /spec/selector/matchLabels/app.kubernetes.io~1name
+      value: testapp-dev
+  target:
+    group: apps
+    kind: Deployment
+    name: testapp
+    version: v1
+- patch: |-
+    - op: replace
+      path: /spec/selector/app.kubernetes.io~1name
+      value: testapp-dev
+  target:
+    kind: Service
+    name: testapp
+    version: v1
+- path: version.yaml
+- patch: |-
+    - op: add
+      path: /spec/template/spec/imagePullSecrets
+      value:
+        - name: ghcr-cred
+  target:
+    group: apps
+    kind: Deployment
+    name: testapp
+    version: v1
