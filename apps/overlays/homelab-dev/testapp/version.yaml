@@ -13,4 +13,4 @@ spec:
     spec:
       containers:
         - name: testapp
-          image: vlalex/testapp:0.0.1
+          image: vlalex/testapp:0.0.2
