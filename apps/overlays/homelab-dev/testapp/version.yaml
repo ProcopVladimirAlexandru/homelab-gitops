@@ -1,4 +1,3 @@
-# This file helps to dynamically override the image tag for the testapp deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,4 +13,4 @@ spec:
     spec:
       containers:
         - name: testapp
-          image: ghcr.io/ProcopVladimirAlexandru/testapp-dev:latest
+          image: vlalex/testapp:0.0.1
